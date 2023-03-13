@@ -21,14 +21,35 @@ variable "my_ami" {
   default     = "ami-0b752bf1df193a6c4"
 }
 
+variable "instance_type" {
+  description = "Instance type for EC2"
+  type        = string
+  default     = "t2.micro"
+}
 
+variable "project" {
+  type    = string
+  default = "proj99"
+}
+
+## Create instance - will use defaults for parameters not specified (e.g. VPC, security group)
 resource "aws_instance" "server1" {
   ami           = var.my_ami
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
 
   tags = {
     Name    = "vm1"
-    project = "acme"
+    project = var.project
   }
+}
+
+output "instance_stuff" {
+  description = "all info about instance"
+  value       = aws_instance.server1
+}
+
+output "instance_id" {
+  description = "now only the instance ID"
+  value       = aws_instance.server1.id
 }
 

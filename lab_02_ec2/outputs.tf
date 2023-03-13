@@ -1,21 +1,26 @@
 output "public_ip" {
   description = "Public IP of instance"
-  value       = aws_instance.test1.public_ip
+  value       = aws_instance.server1.public_ip
 }
 
-output "key_name" {
-  description = "SSH Key Name"
-  value       = aws_instance.test1.key_name
-}
+# output "key_name" {
+#   description = "SSH Key Name"
+#   value       = aws_instance.server1.key_name
+# }
 
 output "ami" {
   description = "AMI of instance"
-  value       = aws_instance.test1.ami
+  value       = aws_instance.server1.ami
 }
+
+# output "instance_stuff" {
+#   description = "all info about instance"
+#   value       = aws_instance.server1
+# }
 
 output "instance_id" {
   description = "Id of instance"
-  value       = aws_instance.test1.id
+  value       = aws_instance.server1.id
 }
 
 
@@ -24,7 +29,13 @@ output "instance_id" {
 #   value = data.aws_ami.amazon_linux2_kernel_5
 # }
 
+
+
+## To use for example in IAM policies or retrieving caller identity
+data "aws_caller_identity" "current" {
+
+}
 output "user_identity" {
-    description = "Info about IAM principal used by Terraform to configure AWS"
-    value = data.aws_caller_identity.current
+  description = "Info about IAM principal used by Terraform to configure AWS"
+  value       = data.aws_caller_identity.current
 }

@@ -18,7 +18,7 @@ resource "aws_security_group" "sec_web" {
   vpc_id = data.aws_vpc.def_vpc.id
   name   = "sec-web-${var.project}"
   ingress {
-    description = "Temp for testing - SSH from specific addresses"
+    description = "SSH from specific addresses"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -34,12 +34,19 @@ resource "aws_security_group" "sec_web" {
   }
 
   ingress {
-    description = "TCP Port 5000 from specific addresses"
+    description = "TCP Port 80 from specific addresses"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = var.sec_allowed_external
-    # security_groups = [aws_security_group.sec_alb.id]
+  }
+
+  ingress {
+    description = "Allow TCP for special portfrom specific addresses"
+    from_port   = var.special_port
+    to_port     = var.special_port
+    protocol    = "tcp"
+    cidr_blocks = var.sec_allowed_external
   }
 
   egress {

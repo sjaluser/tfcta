@@ -1,21 +1,21 @@
 ## AWS Specific parameters
 
 variable "region" {
-  type = string
+  type    = string
   default = "eu-west-1"
 }
 
 variable "profile" {
-  type = string
+  type    = string
   default = "cta"
 }
 
 
 ## Environment and Project
 variable "company" {
-  type = string
+  type        = string
   description = "company name - will be used in tags"
-  default = "acme"
+  default     = "acme"
 }
 variable "environment" {
   type        = string
@@ -30,10 +30,10 @@ variable "project" {
 
 ## VPC parameters
 variable "vpc_cidr" {
-  type = string
+  type    = string
   default = "10.99.0.0/16"
   validation {
-    condition = can(cidrnetmask(var.vpc_cidr))   ## Needs work
+    condition     = can(cidrnetmask(var.vpc_cidr)) ## Needs work
     error_message = "Invalid CIDR for VPC."
   }
 }
@@ -45,10 +45,16 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "key_name" {
-  type = string
-  default = "tf-course"
+variable "my_ami" {
+  description = "ami for EC2 instance"
+  type        = string
+  default     = "ami-0b752bf1df193a6c4"
 }
+
+# variable "key_name" {
+#   type = string
+#   default = "tf-course"
+# }
 
 
 ## Security Groups
@@ -59,8 +65,8 @@ variable "sec_allowed_external" {
 }
 
 ## ECS Parameters
-variable "container_port" {
+variable "special_port" {
   type = string
-  
+
 }
 

@@ -7,7 +7,7 @@ variable "region" {
 
 variable "profile" {
   type = string
-  default = "tfadmin1"
+  default = "cta"
 }
 
 

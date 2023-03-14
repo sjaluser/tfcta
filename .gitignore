@@ -2,6 +2,7 @@
 0_common/*
 *.zip
 .DS_Store
+*.log
 
 # Local .terraform directories
 **/.terraform/*

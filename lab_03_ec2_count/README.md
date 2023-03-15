@@ -32,7 +32,10 @@ Take a look at the output blocks... what has changed vs lab02
 Increment num_instances by one, perhaps by adding it to file terraform.tfvars
 What happens
 
-## Decrement number of instances
+## Add a validation to the num_instances variable
+for example >0 and <=4
+Test it... is it enough with terraform validate?  or do you need to do terraform plan?
+
 
 
 

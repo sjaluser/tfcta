@@ -10,7 +10,11 @@ variable "profile" {
   default = "cta"
 }
 
-
+## 
+variable "num_instances" {
+  type = number
+  default = 2
+}
 ## Environment and Project
 variable "company" {
   type        = string

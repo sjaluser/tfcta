@@ -16,7 +16,7 @@ provider "aws" {
     tags = {
       "${var.company}:environment" = var.environment
       "${var.company}:project"     = var.project
-      created_by                   = "terraform"
+      "${var.company}:created_by"  = "terraform"
       disposable                   = true
     }
   }

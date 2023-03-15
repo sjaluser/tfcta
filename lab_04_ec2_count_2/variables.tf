@@ -10,6 +10,16 @@ variable "profile" {
   default = "cta"
 }
 
+## Names of instances
+variable "instance_names" {
+  type    = list(string)
+  default = ["dep1", "dep2", "dep3", "dep4"]
+  validation {
+    condition     = length(var.instance_names) > 0 && length(var.instance_names) <= 4
+    error_message = "Wrong number of instance names"
+  }
+}
+
 
 ## Environment and Project
 variable "company" {
@@ -67,7 +77,7 @@ variable "sec_allowed_external" {
 
 ## ECS Parameters
 variable "special_port" {
-  type = string
+  type        = string
   description = "TCP port where Foobar application listens"
 
 }

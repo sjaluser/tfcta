@@ -3,9 +3,12 @@
 *.zip
 .DS_Store
 *.log
+.terraform.lock.hcl
 
 # Local .terraform directories
 **/.terraform/*
+
+
 
 # .tfstate files
 *.tfstate

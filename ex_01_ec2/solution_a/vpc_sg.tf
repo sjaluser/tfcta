@@ -5,6 +5,10 @@
 resource "aws_security_group" "sec" {
   vpc_id = data.aws_vpc.def_vpc.id
   name   = "sec-rec-${local.name_suffix}"
+
+    lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_vpc_security_group_egress_rule" "example" {

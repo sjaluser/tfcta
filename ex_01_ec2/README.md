@@ -6,11 +6,6 @@ Create 2 EC2 Instances in default vpc  (hint: use data source for default vpc)
 
 - Security group : start with the "integrated" SG like we have seen so far that includes the ingress and egress rules inside the SG resource. 
 
-Once you are satisfied that it works, you can create a new SG  the "recommended" way: 
-    - One aws_security_group resource for the security group
-    - Use aws_vpc_security_group_ingress_rule  and aws_vpc_security_group_egress_rule for each rule
-    - Make sure the names of the two security group do not "collide"
-    - Point the instances to the new SG
 
 - Local variables :  use a local variable to construct a "name suffix" that you will use in:
     - The "Name" label of EC2 instance and security group constructs
@@ -28,9 +23,27 @@ The instances will be in different Availability Zones (AZs)
 - What do you think will happen when you do "terraform plan"? Make a guess and then verify it
 
 ## More advanced options
-Create another two EC2 instances with the same parameters in another region (eu-south-2) -- you have to use eu-south-2 due to IAM policies in SSO permission sets.
+
+
+
+1. Deploy Multi Region
+
+Create another two EC2 instances with the same parameters in another region (eu-central-1) -- you have to use eu-central-1 due to IAM policies in SSO permission sets.
 
 - Hint:  use provider aliases
 Docs: https://developer.hashicorp.com/terraform/language/providers/configuration
 
+- To make this exercise simpler,  remove references to security groups from the instance definition. This means the EC2 instances will use automatically the default SG from the default VPC in each region
+
+
 You can also explore the use of "count" to create more than one, but we will see this in another lab.
+
+2. Another way to define SGs
+
+1.  Security Group
+
+Create a new SG  the "recommended" way: 
+    - One aws_security_group resource for the security group
+    - Use aws_vpc_security_group_ingress_rule  and aws_vpc_security_group_egress_rule for each rule
+    - Make sure the names of the two security group do not "collide"
+    - Point the instances to the new SG

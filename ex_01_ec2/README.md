@@ -28,7 +28,9 @@ The instances will be in different Availability Zones (AZs)
 - What do you think will happen when you do "terraform plan"? Make a guess and then verify it
 
 ## More advanced options
-Create another two EC2 instances with the same parameters in another region
+Create another two EC2 instances with the same parameters in another region (eu-south-2) -- you have to use eu-south-2 due to IAM policies in SSO permission sets.
+
 - Hint:  use provider aliases
+Docs: https://developer.hashicorp.com/terraform/language/providers/configuration
 
 You can also explore the use of "count" to create more than one, but we will see this in another lab.

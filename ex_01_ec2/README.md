@@ -23,7 +23,8 @@ Once you have created the two instances , lets modify the TF configuration so th
 
 
 The instances will be in different Availability Zones (AZs)
-- Tip:  In AWS you assign an AZ based on the subnet   (hint: subnet data source)
+- Tip:  In AWS you assign an AZ based on the subnet   (hint: aws_subnet data source)
+- To get an idea of what is in the aws_subnet - use output
 - What do you think will happen when you do "terraform plan"? Make a guess and then verify it
 
 ## More advanced options

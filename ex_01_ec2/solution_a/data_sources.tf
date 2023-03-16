@@ -7,11 +7,13 @@ data "aws_ami_ids" "ubuntu_amis" {
   }
 }
 
+## Filter based on ubuntu web article
+# https://ubuntu.com/tutorials/search-and-launch-ubuntu-22-04-in-aws-using-cli
+
 data "aws_ami" "ubuntu_22_04" {
   most_recent = true
   filter {
     name   = "name"
-    # values = ["ubuntu/images/hvm-ssd/ubuntu-focal-22.04-amd64-server-*"]
     values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server*"]
   }
 

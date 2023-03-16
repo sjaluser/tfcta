@@ -55,9 +55,7 @@ resource "aws_security_group" "sec_web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "sec-web-${local.name_suffix}"
+    Name = "sec-web"
   }
-  lifecycle {
-    create_before_destroy = true
-  }
+
 }

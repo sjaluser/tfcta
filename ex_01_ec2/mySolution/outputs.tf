@@ -13,6 +13,12 @@ output "user_identity" {
 output "public_ip_prueba1" {
     value = aws_instance.prueba1.public_dns
 }
-output "public_ip_prueba2" {
-    value = aws_instance.prueba2.public_dns
+
+
+output "ubuntu_amis_r2" {
+  value = data.aws_ami_ids.ubuntu_amis_r2
+}
+
+output "def_vpc_subnets" {
+  value = data.aws_subnets.def_vpc_subnets
 }

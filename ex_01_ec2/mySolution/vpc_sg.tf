@@ -47,6 +47,7 @@ resource "aws_security_group" "sec_web" {
 
 
 resource "aws_security_group" "sec_web_r2" {
+  provider = aws.region2
   vpc_id = data.aws_vpc.def_vpc_r2.id
   name   = "sec-web-r2-${local.name_suffix}"
   ingress {

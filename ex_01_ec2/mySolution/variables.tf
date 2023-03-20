@@ -5,24 +5,27 @@ variable "region" {
   default = "eu-west-1"
 }
 
+
+## Region 2 eg for disaster recovery
+variable "region2" {
+  type    = string
+  # default = "eu-south-2"
+  default = "eu-central-1"
+}
+
 variable "profile" {
   type    = string
   default = "cta"
 }
 
 
-variable "snapshot_id" {
-  type    = string
-  default = "snap-0993b8aed2d2501ba"
-}
-
-
 ## Environment and Project
-variable "company" {
+variable "lab_number" {
   type        = string
-  description = "company name - will be used in tags"
-  default     = "acme"
+  description = "lab number"
+  default     = "ex1"
 }
+
 variable "environment" {
   type        = string
   description = "e.g. test dev prod"
@@ -57,11 +60,12 @@ variable "my_ami" {
   default     = "ami-0b752bf1df193a6c4"
 }
 
-# variable "key_name" {
-#   type = string
-#   default = "tf-course"
-# }
 
+variable "company" {
+  type        = string
+  description = "company name - will be used in tags"
+  default     = "acme"
+}
 
 ## Security Groups
 variable "sec_allowed_external" {
@@ -71,10 +75,19 @@ variable "sec_allowed_external" {
   # default = ["2.37.1.5/32"]
 }
 
-## ECS Parameters
-variable "special_port" {
-  type = string
-  description = "TCP port where Foobar application listens"
 
+
+## specific for "count"
+variable "num_instances" {
+  type    = number
+  default = 2
 }
 
+variable "num_azs" {
+  type        = number
+  description = "Number of AZs to distribute instances"
+  validation {
+    condition     = var.num_azs >= 1 && var.num_azs <= 3
+    error_message = "Invalid number of AZs to distribute instances"
+  }
+}

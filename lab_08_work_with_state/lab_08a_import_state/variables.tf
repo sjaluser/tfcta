@@ -10,13 +10,6 @@ variable "profile" {
   default = "cta"
 }
 
-
-variable "snapshot_id" {
-  type    = string
-  default = "snap-0993b8aed2d2501ba"
-}
-
-
 ## Environment and Project
 variable "company" {
   type        = string
@@ -32,6 +25,11 @@ variable "environment" {
 variable "project" {
   type    = string
   default = "proj99"
+}
+
+variable "lab_number" {
+  type    = string
+  default = "ex01a"
 }
 
 ## VPC parameters
@@ -68,13 +66,12 @@ variable "sec_allowed_external" {
   description = "CIDRs from which access is allowed"
   type        = list(string)
   default     = ["0.0.0.0/0"]
-  # default = ["2.37.1.5/32"]
+  # default = ["2.37.1.5/32", "8.2.0.0/16"]
 }
 
 ## ECS Parameters
 variable "special_port" {
-  type = string
+  type        = string
   description = "TCP port where Foobar application listens"
-
 }
 

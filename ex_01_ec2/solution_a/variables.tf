@@ -55,11 +55,13 @@ variable "my_ami" {
   default     = "ami-0b752bf1df193a6c4"
 }
 
-# variable "key_name" {
-#   type = string
-#   default = "tf-course"
-# }
 
+## Region 2 eg for disaster recovery
+variable "region2" {
+  type    = string
+  # default = "eu-south-2"
+  default = "eu-central-1"
+}
 
 ## Security Groups
 variable "sec_allowed_external" {

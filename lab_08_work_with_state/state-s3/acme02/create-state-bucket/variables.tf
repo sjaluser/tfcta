@@ -20,3 +20,10 @@ variable "profile" {
   description = "AWS CLI profile to be used by Terraform when performing API calls"
   type        = string
 }
+
+
+variable "company" {
+  description = "AWS CLI profile to be used by Terraform when performing API calls"
+  default= "acme"
+  type        = string
+}

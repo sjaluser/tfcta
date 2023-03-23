@@ -8,6 +8,7 @@ resource "aws_vpc" "vpc1" {
 
 resource "aws_subnet" "public_subnet" {
   count                = length(var.public_subnets)
+  map_public_ip_on_launch = true
   availability_zone_id = local.az_id[count.index]
   vpc_id               = aws_vpc.vpc1.id
   cidr_block           = var.public_subnets[count.index]
@@ -100,3 +101,83 @@ resource "aws_route_table_association" "db" {
   subnet_id      = aws_subnet.db_subnet[count.index].id
   route_table_id = aws_route_table.db_subnet_rt[count.index].id
 }
+
+
+
+resource "aws_security_group" "sec_web" {
+  vpc_id = aws_vpc.vpc1.id
+  name   = "sec-web-lab7"
+  ingress {
+    description = "SSH from specific addresses"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = var.sec_allowed_external
+  }
+  ingress {
+    description = "Ping from specific addresses"
+    from_port   = 8 # ICMP Code 8 - echo  (0 is echo reply)
+    to_port     = 0
+    protocol    = "icmp"
+    cidr_blocks = var.sec_allowed_external
+  }
+
+  ingress {
+    description = "TCP Port 80 from specific addresses"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = var.sec_allowed_external
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "sec-web-lab7"
+  }
+
+}
+
+
+resource "aws_security_group" "sec_back" {
+  vpc_id = aws_vpc.vpc1.id
+  name   = "sec-back-lab7"
+  ingress {
+    description = "SSH from specific addresses"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = var.sec_allowed_external
+  }
+  ingress {
+    description = "Ping from specific addresses"
+    from_port   = 8 # ICMP Code 8 - echo  (0 is echo reply)
+    to_port     = 0
+    protocol    = "icmp"
+    security_groups = [aws_security_group.sec_web.id]
+  }
+
+  ingress {
+    description = "TCP Port 80 from specific addresses"
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = var.sec_allowed_external
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "sec-back-lab7"
+  }
+
+}
+
